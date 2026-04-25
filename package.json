@@ -1,0 +1,12 @@
+{
+  "name": "mohr-circle-demo",
+  "private": true,
+  "scripts": {
+    "hooks:install": "git config core.hooksPath .githooks",
+    "format": "prettier --write \"*.{html,css}\" \"src/**/*.js\" \".vscode/**/*.json\"",
+    "format:check": "prettier --check \"*.{html,css}\" \"src/**/*.js\" \".vscode/**/*.json\""
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
+}

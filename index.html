@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Interactive Mohr's Circle — Plane Stress</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <h1>Mohr's Circle — Plane Stress</h1>
+        <p>
+          Drag the stress element to rotate it through angle <code>θ</code> and see the
+          corresponding point move on Mohr's circle. Drag Mohr's circle to do the inverse. Edit σx,
+          σy, τxy at the reference orientation (θ = 0).
+        </p>
+      </header>
+
+      <div class="controls">
+        <h2 class="controls-title">Reference Stress Element State (θ = 0)</h2>
+        <label
+          ><span class="control-label-text">σ<sub>x</sub> (MPa)</span
+          ><input type="number" id="sigmaX" value="60" step="5"
+        /></label>
+        <label
+          ><span class="control-label-text">σ<sub>y</sub> (MPa)</span
+          ><input type="number" id="sigmaY" value="-20" step="5"
+        /></label>
+        <label
+          ><span class="control-label-text">τ<sub>xy</sub> (MPa)</span
+          ><input type="number" id="tauXY" value="30" step="5"
+        /></label>
+        <label
+          ><span class="control-label-text">θ (deg)</span
+          ><input type="number" id="thetaInput" value="0" step="1"
+        /></label>
+        <button id="resetBtn">Reset θ → 0</button>
+      </div>
+
+      <div class="canvas-row">
+        <div class="panel">
+          <h2>Stress Element — drag to rotate</h2>
+          <canvas id="elementCanvas"></canvas>
+          <div class="legend">
+            <span><i style="background: var(--tension)"></i>tension (σ &gt; 0)</span>
+            <span><i style="background: var(--compression)"></i>compression (σ &lt; 0)</span>
+            <span><i style="background: var(--shear)"></i>shear τ</span>
+            <span><i style="background: var(--arc)"></i>angle θ</span>
+          </div>
+        </div>
+        <div class="panel">
+          <h2>Mohr's Circle — drag to rotate</h2>
+          <canvas id="mohrCanvas"></canvas>
+          <div class="legend">
+            <span><i style="background: var(--shear)"></i>X-face (σx', τx'y')</span>
+            <span><i style="background: var(--accent)"></i>Y-face (σy', −τx'y')</span>
+            <span><i style="background: #9ca3af"></i>principal σ₁, σ₂</span>
+            <span><i style="background: var(--arc)"></i>angle 2θ</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info">
+        <h2 class="info-title">Computed Stress Results</h2>
+        <div class="info-block">
+          <span class="info-label">θ (°)</span>
+          <span class="info-value" id="dispTheta">0.0°</span>
+        </div>
+        <div class="info-block">
+          <span class="info-label">σ<sub>x'</sub> (MPa)</span>
+          <span class="info-value" id="dispSxp">0.00</span>
+        </div>
+        <div class="info-block">
+          <span class="info-label">σ<sub>y'</sub> (MPa)</span>
+          <span class="info-value" id="dispSyp">0.00</span>
+        </div>
+        <div class="info-block">
+          <span class="info-label">τ<sub>x'y'</sub> (MPa)</span>
+          <span class="info-value" id="dispTxp">0.00</span>
+        </div>
+        <div class="info-block">
+          <span class="info-label">σ <sub>1</sub> , σ<sub>2</sub> (MPa)</span>
+          <span class="info-value">
+            <span id="dispSigma1">—</span><span class="info-sep"> , </span
+            ><span id="dispSigma2">—</span>
+          </span>
+        </div>
+        <div class="info-block">
+          <span class="info-label">τ<sub>max</sub> (MPa) at θ (°)</span>
+          <span class="info-value">
+            <span id="dispTmax">—</span><span class="info-sep"> at </span
+            ><span id="dispThetaS">—</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>
