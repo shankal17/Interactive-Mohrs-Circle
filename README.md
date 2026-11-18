@@ -1,6 +1,8 @@
 # Mohr's Circle Demo
 
-Interactive Mohr's-circle visualization for plane stress
+Interactive Mohr's-circle visualization for plane stress.
+
+Take a look if you want: https://shankal17.github.io/Interactive-Mohrs-Circle/
 
 ## Formatting
 
